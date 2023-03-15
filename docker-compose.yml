@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    command: ["yarn", "start:server"]
+    volumes:
+      - /usr/src/app
+    environment:
+      APP_ENV: dev
+      COOKIE_SECRET: 473l3u03zkc
+      SUPERADMIN_USERNAME: superadmin
+      SUPERADMIN_PASSWORD: superadmin
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_NAME: vendure
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["yarn", "start:worker"]
+    volumes:
+      - /usr/src/app
+    environment:
+      APP_ENV: dev
+      COOKIE_SECRET: 473l3u03zkc
+      SUPERADMIN_USERNAME: superadmin
+      SUPERADMIN_PASSWORD: superadmin
+      DB_HOST: database
+      DB_PORT: 5432
+      DB_NAME: vendure
+      DB_USERNAME: postgres
+      DB_PASSWORD: password
+  storefront:
+    build:
+      context: .
+      dockerfile: Dockerfile.storefront
+      args:
+        STOREFRONT_VERSION: 0.1.27
+    ports:
+      - 4000:4000
+    environment:
+      SERVER_API_HOST: http://server
+      SERVER_API_PORT: 3000
+      SERVER_API_PATH: shop-api
+  database:
+    image: postgres
+    volumes:
+      - /var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: vendure
