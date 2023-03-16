@@ -37,6 +37,7 @@ services:
     labels:
         - "traefik.http.routers.admin.rule=Host(`admin.${PRIMARY_DOMAIN}`)"
         - "traefik.http.services.admin.loadbalancer.server.port=3000"
+        - "traefik.http.middlewares.admin.addprefix.admin=/"
 
   worker:
     build:
@@ -74,8 +75,6 @@ services:
     image: postgres
     volumes:
       - db-data:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
