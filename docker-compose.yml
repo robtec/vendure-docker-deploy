@@ -1,6 +1,21 @@
 version: "3.9"
 
 services:
+
+  traefik:
+      image: traefik:v2.9
+      container_name: traefik
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - ./files/traefik.toml:/etc/traefik/traefik.toml
+      depends_on:
+        - database
+        - vendure
+      ports:
+        - 8080:8080
+        - 80:80
+        - 443:443
+
   server:
     build:
       context: .
@@ -9,7 +24,9 @@ services:
       - 3000:3000
     command: ["yarn", "start:server"]
     volumes:
-      - app-data:/usr/src/app
+      - /usr/src/app
+    labels:
+      - traefik.http.routers.server.rule=Host(`${PRIMARY_DOMAIN}`)
     environment:
       APP_ENV: ${APP_ENV}
       COOKIE_SECRET: ${COOKIE_SECRET}
@@ -27,7 +44,7 @@ services:
       dockerfile: Dockerfile
     command: ["yarn", "start:worker"]
     volumes:
-      - app-data:/usr/src/app
+      - /usr/src/app
     environment:
       APP_ENV: ${APP_ENV}
       COOKIE_SECRET: ${COOKIE_SECRET}
@@ -63,7 +80,5 @@ services:
       POSTGRES_DB: ${DB_NAME}
 
 volumes:
-  app-data:
-    external: true
   db-data:
     external: true
