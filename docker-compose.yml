@@ -20,8 +20,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - 3000:3000
     command: ["yarn", "start:server"]
     volumes:
       - /usr/src/app
@@ -35,7 +33,10 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
-  
+    labels:
+        - "traefik.http.routers.admin.rule=Host(`admin.${PRIMARY_DOMAIN}`)"
+        - "traefik.http.services.admin.loadbalancer.server.port=3000"
+
   worker:
     build:
       context: .
@@ -65,8 +66,8 @@ services:
       SERVER_API_PORT: 3000
       SERVER_API_PATH: shop-api
     labels:
-      - "traefik.http.routers.server.rule=Host(`${PRIMARY_DOMAIN}`)"
-      - "traefik.http.services.server.loadbalancer.server.port=4000"
+      - "traefik.http.routers.storefront.rule=Host(`${PRIMARY_DOMAIN}`)"
+      - "traefik.http.services.storefront.loadbalancer.server.port=4000"
   
   database:
     image: postgres
