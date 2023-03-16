@@ -37,8 +37,6 @@ services:
     labels:
         - "traefik.http.routers.admin.rule=Host(`admin.${PRIMARY_DOMAIN}`)"
         - "traefik.http.services.admin.loadbalancer.server.port=3000"
-        - "traefik.http.middlewares.admin-add-prefix.addprefix.prefix=/admin"
-        - "traefik.http.routers.admin.middlewares=admin-add-prefix@docker"
 
   worker:
     build:
