@@ -60,14 +60,12 @@ services:
       dockerfile: Dockerfile.storefront
       args:
         STOREFRONT_VERSION: 0.1.27
-    ports:
-      - 4000:4000
     environment:
       SERVER_API_HOST: http://server
       SERVER_API_PORT: 3000
       SERVER_API_PATH: shop-api
     labels:
-      - "traefik.http.routers.server.rule=Path(`/`)"
+      - "traefik.http.routers.server.rule=Host(`${PRIMARY_DOMAIN}`)"
       - "traefik.http.services.server.loadbalancer.server.port=4000"
   
   database:
