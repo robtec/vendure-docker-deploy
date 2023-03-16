@@ -26,7 +26,7 @@ services:
     volumes:
       - /usr/src/app
     labels:
-      - traefik.http.routers.server.rule=Host(`${PRIMARY_DOMAIN}`)
+      - traefik.http.routers.server.rule=Path(`/`)
     environment:
       APP_ENV: ${APP_ENV}
       COOKIE_SECRET: ${COOKIE_SECRET}
