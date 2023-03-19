@@ -5,15 +5,23 @@ services:
   traefik:
       image: traefik:v2.9
       container_name: traefik
-      command: --api.insecure=true --providers.docker
+      command:
+        #- "--log.level=DEBUG"
+        #- "--api.insecure=true"
+        - "--providers.docker=true"
+        - "--providers.docker.exposedbydefault=false"
+        - "--entrypoints.web.address=:80"
+        - "--entrypoints.websecure.address=:443"
+        - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+        - "--certificatesresolvers.myresolver.acme.email=${ACME_MY_EMAIL}"
+        - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock
-        - ./files/traefik.toml:/etc/traefik/traefik.toml
+        - "./letsencrypt:/letsencrypt"
       depends_on:
         - server
         - database
       ports:
-        - 8080:8080
         - 80:80
         - 443:443
 
@@ -37,6 +45,8 @@ services:
     labels:
         - "traefik.http.routers.admin.rule=Host(`admin.${PRIMARY_DOMAIN}`)"
         - "traefik.http.services.admin.loadbalancer.server.port=3000"
+        - "traefik.http.routers.admin.entrypoints=websecure"
+        - "traefik.http.routers.admin.tls.certresolver=myresolver"
 
   worker:
     build:
@@ -69,7 +79,9 @@ services:
     labels:
       - "traefik.http.routers.storefront.rule=Host(`${PRIMARY_DOMAIN}`)"
       - "traefik.http.services.storefront.loadbalancer.server.port=4000"
-  
+      - "traefik.http.routers.storefront.entrypoints=websecure"
+      - "traefik.http.routers.storefront.tls.certresolver=myresolver"
+      
   database:
     image: postgres
     volumes:
