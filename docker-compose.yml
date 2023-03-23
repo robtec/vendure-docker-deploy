@@ -70,8 +70,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.remixstorefront
-    volumes:
-      - ./storefront-remix-starter:/usr/src/app
     environment:
       SERVER_API_HOST: http://server
       SERVER_API_PORT: 3000
