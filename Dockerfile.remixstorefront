@@ -1,0 +1,9 @@
+FROM node:16
+
+WORKDIR /usr/src/app
+
+RUN yarn
+
+RUN yarn build:ssr:docker
+
+CMD ["node", "dist/server/main.js"]
