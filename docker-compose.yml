@@ -3,26 +3,26 @@ version: "3.9"
 services:
 
   traefik:
-      image: traefik:v2.9
-      container_name: traefik
-      command:
-        - "--log.level=DEBUG"
-        #- "--api.insecure=true"
-        - "--providers.docker=true"
-        - "--providers.docker.exposedbydefault=false"
-        - "--entrypoints.websecure.address=:443"
-        - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-        - "--certificatesresolvers.myresolver.acme.email=${ACME_MY_EMAIL}"
-        - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - "/etc/letsencrypt:/letsencrypt"
-      depends_on:
-        - server
-        - database
-      ports:
-        - 80:80
-        - 443:443
+    image: traefik:v2.9
+    container_name: traefik
+    command:
+      - "--log.level=DEBUG"
+      #- "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=${ACME_MY_EMAIL}"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - "/etc/letsencrypt:/letsencrypt"
+    depends_on:
+      - server
+      - database
+    ports:
+      - 80:80
+      - 443:443
 
   server:
     build:
@@ -41,12 +41,14 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 3000:3000
     labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.admin.rule=Host(`admin.${PRIMARY_DOMAIN}`)"
-        - "traefik.http.services.admin.loadbalancer.server.port=3000"
-        - "traefik.http.routers.admin.entrypoints=websecure"
-        - "traefik.http.routers.admin.tls.certresolver=myresolver"
+      - "traefik.enable=true"
+      - "traefik.http.routers.admin.rule=Host(`admin.${PRIMARY_DOMAIN}`)"
+      - "traefik.http.services.admin.loadbalancer.server.port=3000"
+      - "traefik.http.routers.admin.entrypoints=websecure"
+      - "traefik.http.routers.admin.tls.certresolver=myresolver"
 
   worker:
     build:
