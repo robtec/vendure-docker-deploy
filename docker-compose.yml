@@ -69,7 +69,7 @@ services:
   storefront:
     build:
       context: .
-      dockerfile: Dockerfile.remixstorefront
+      dockerfile: Dockerfile.storefront
     environment:
       SERVER_API_HOST: http://server
       SERVER_API_PORT: 3000
