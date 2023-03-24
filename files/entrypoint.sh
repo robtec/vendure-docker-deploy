@@ -2,4 +2,6 @@
 
 echo "VENDURE_API_URL=${SERVER_API_HOST}:${SERVER_API_PORT}/${SERVER_API_PATH}" > .env
 
-npm run dev
+echo "NODE_ENV=production" >> .env
+
+npm run dev:cf
