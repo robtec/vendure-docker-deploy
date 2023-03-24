@@ -46,6 +46,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin.rule=Host(`admin.${PRIMARY_DOMAIN}`)"
+      - "traefik.http.routers.admin.rule=Host(`api.${PRIMARY_DOMAIN}`)"
       - "traefik.http.services.admin.loadbalancer.server.port=3000"
       - "traefik.http.routers.admin.entrypoints=websecure"
       - "traefik.http.routers.admin.tls.certresolver=myresolver"
@@ -75,8 +76,8 @@ services:
       args:
         STOREFRONT_VERSION: 0.1.27
     environment:
-      SERVER_API_HOST: http://server
-      SERVER_API_PORT: 3000
+      SERVER_API_HOST: https://api.${PRIMARY_DOMAIN}
+      SERVER_API_PORT: 443
       SERVER_API_PATH: shop-api
     labels:
       - "traefik.enable=true"
