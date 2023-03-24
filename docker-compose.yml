@@ -70,8 +70,8 @@ services:
   
   storefront:
     build:
-      context: storefront/
-      dockerfile: storefront/Dockerfile.storefront
+      context: ./storefront/
+      dockerfile: ./storefront/Dockerfile.storefront
       args:
         STOREFRONT_VERSION: 0.1.27
     environment:
