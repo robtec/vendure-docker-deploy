@@ -41,8 +41,6 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - 3000:3000
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin.rule=Host(`admin.${PRIMARY_DOMAIN}`)"
