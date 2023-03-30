@@ -76,7 +76,7 @@ export const config: VendureConfig = {
         DefaultSearchPlugin.init({ bufferUpdates: false, indexStockStatus: true }),
         EmailPlugin.init({
             handlers: defaultEmailHandlers,
-            templatePath: path.join(__dirname, 'static/email/templates'),
+            templatePath: path.join(__dirname, '../static/email/templates'),
             transport: {
                 type: 'smtp',
                 host: process.env.SMTP_HOST,
