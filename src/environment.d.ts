@@ -15,6 +15,10 @@ declare global {
             DB_USERNAME: string;
             DB_PASSWORD: string;
             DB_SCHEMA: string;
+            SMTP_HOST: string;
+            SMTP_USER: string;
+            SMTP_PASS: string;
+            SMTP_PORT: number;
         }
     }
 }
