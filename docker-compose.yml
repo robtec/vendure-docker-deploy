@@ -45,6 +45,8 @@ services:
       SMTP_PASS: ${SMTP_PASS}
       SMTP_HOST: ${SMTP_HOST}
       SMTP_PORT: ${SMTP_PORT}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SIGNING_SECRET: ${STRIPE_WEBHOOK_SIGNING_SECRET}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin.rule=Host(`admin.${PRIMARY_DOMAIN}`)"
@@ -59,6 +61,9 @@ services:
     command: ["yarn", "start:worker"]
     volumes:
       - /usr/src/app
+    depends_on:
+      - server
+      - database
     environment:
       APP_ENV: ${APP_ENV}
       COOKIE_SECRET: ${COOKIE_SECRET}
@@ -73,6 +78,8 @@ services:
       SMTP_PASS: ${SMTP_PASS}
       SMTP_HOST: ${SMTP_HOST}
       SMTP_PORT: ${SMTP_PORT}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SIGNING_SECRET: ${STRIPE_WEBHOOK_SIGNING_SECRET}
   
   storefront:
     build:

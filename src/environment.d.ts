@@ -19,6 +19,8 @@ declare global {
             SMTP_USER: string;
             SMTP_PASS: string;
             SMTP_PORT: number;
+            STRIPE_SECRET_KEY: string;
+            STRIPE_WEBHOOK_SIGNING_SECRET: string;
         }
     }
 }
