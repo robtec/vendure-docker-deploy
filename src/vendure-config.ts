@@ -1,5 +1,4 @@
 import {
-    dummyPaymentHandler,
     DefaultJobQueuePlugin,
     DefaultSearchPlugin,
     VendureConfig,
@@ -57,9 +56,6 @@ export const config: VendureConfig = {
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
     },
-    paymentOptions: {
-        paymentMethodHandlers: [dummyPaymentHandler],
-    },
     // When adding or altering custom field definitions, the database will
     // need to be updated. See the "Migrations" section in README.md.
     customFields: {
@@ -78,6 +74,9 @@ export const config: VendureConfig = {
         EmailPlugin.init({
             handlers: defaultEmailHandlers,
             templatePath: path.join(__dirname, '../static/email/templates'),
+            globalTemplateVars: {
+                fromAddress: process.env.NO_REPLY_EMAIL,
+            },
             transport: {
                 type: 'smtp',
                 host: process.env.SMTP_HOST,

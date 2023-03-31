@@ -21,6 +21,7 @@ declare global {
             SMTP_PORT: number;
             STRIPE_SECRET_KEY: string;
             STRIPE_WEBHOOK_SIGNING_SECRET: string;
+            NO_REPLY_EMAIL: string;
         }
     }
 }

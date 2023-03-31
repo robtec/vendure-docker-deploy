@@ -47,6 +47,7 @@ services:
       SMTP_PORT: ${SMTP_PORT}
       STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
       STRIPE_WEBHOOK_SIGNING_SECRET: ${STRIPE_WEBHOOK_SIGNING_SECRET}
+      NO_REPLY_EMAIL: ${NO_REPLY_EMAIL}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.admin.rule=Host(`admin.${PRIMARY_DOMAIN}`)"
@@ -80,6 +81,7 @@ services:
       SMTP_PORT: ${SMTP_PORT}
       STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
       STRIPE_WEBHOOK_SIGNING_SECRET: ${STRIPE_WEBHOOK_SIGNING_SECRET}
+      NO_REPLY_EMAIL: ${NO_REPLY_EMAIL}
   
   storefront:
     build:
