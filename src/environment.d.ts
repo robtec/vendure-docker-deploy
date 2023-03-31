@@ -22,6 +22,7 @@ declare global {
             STRIPE_SECRET_KEY: string;
             STRIPE_WEBHOOK_SIGNING_SECRET: string;
             NO_REPLY_EMAIL: string;
+            PRIMARY_DOMAIN: string;
         }
     }
 }
