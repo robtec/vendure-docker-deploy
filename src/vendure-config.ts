@@ -6,7 +6,7 @@ import {
 import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
-import { StripePlugin } from '@vendure/payments-plugin/package/stripe';
+import { stripePaymentMethodHandler, StripePlugin } from '@vendure/payments-plugin/package/stripe';
 import 'dotenv/config';
 import path from 'path';
 
@@ -52,9 +52,12 @@ export const config: VendureConfig = {
         database: process.env.DB_NAME,
         schema: process.env.DB_SCHEMA,
         host: process.env.DB_HOST,
-        port: +process.env.DB_PORT,
+        port: process.env.DB_PORT,
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
+    },
+    paymentOptions: {
+        paymentMethodHandlers: [stripePaymentMethodHandler],
     },
     // When adding or altering custom field definitions, the database will
     // need to be updated. See the "Migrations" section in README.md.
