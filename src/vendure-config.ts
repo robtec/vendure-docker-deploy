@@ -80,9 +80,9 @@ export const config: VendureConfig = {
             templatePath: path.join(__dirname, '../static/email/templates'),
             globalTemplateVars: {
                 fromAddress: process.env.NO_REPLY_EMAIL,
-                verifyEmailAddressUrl: 'https://' + process.env.PRIMARY_DOMAIN + '/verify',
-                passwordResetUrl: 'https://' + process.env.PRIMARY_DOMAIN + '/password-reset',
-                changeEmailAddressUrl: 'https://' + process.env.PRIMARY_DOMAIN + '/verify-email-address-change'
+                verifyEmailAddressUrl: 'https://' + process.env.PRIMARY_DOMAIN + '/account/verify',
+                passwordResetUrl: 'https://' + process.env.PRIMARY_DOMAIN + '/account/reset-password',
+                changeEmailAddressUrl: 'https://' + process.env.PRIMARY_DOMAIN + '/account/change-email-address'
             },
             transport: {
                 type: 'smtp',
