@@ -1,4 +1,5 @@
 import {
+    dummyPaymentHandler,
     DefaultJobQueuePlugin,
     DefaultSearchPlugin,
     VendureConfig,
@@ -6,7 +7,7 @@ import {
 import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
-import { stripePaymentMethodHandler, StripePlugin } from '@vendure/payments-plugin/package/stripe';
+import { StripePlugin } from '@vendure/payments-plugin/package/stripe';
 import 'dotenv/config';
 import path from 'path';
 
@@ -57,7 +58,7 @@ export const config: VendureConfig = {
         password: process.env.DB_PASSWORD,
     },
     paymentOptions: {
-        paymentMethodHandlers: [stripePaymentMethodHandler],
+        paymentMethodHandlers: [dummyPaymentHandler],
     },
     // When adding or altering custom field definitions, the database will
     // need to be updated. See the "Migrations" section in README.md.
