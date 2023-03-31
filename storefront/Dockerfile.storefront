@@ -6,6 +6,8 @@ ADD ./storefront-angular-starter .
 
 RUN yarn
 
+RUN yarn add @stripe/stripe-js
+
 RUN yarn build:ssr:docker
 
 CMD ["node", "dist/server/main.js"]
