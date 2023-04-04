@@ -98,7 +98,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.storefront.rule=Host(`${PRIMARY_DOMAIN}`)"
-      - "traefik.http.services.storefront.loadbalancer.server.port=4000"
+      - "traefik.http.services.storefront.loadbalancer.server.port=3000"
       - "traefik.http.routers.storefront.entrypoints=websecure"
       - "traefik.http.routers.storefront.tls.certresolver=myresolver"
       
