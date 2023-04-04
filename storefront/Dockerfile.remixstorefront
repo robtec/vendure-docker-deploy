@@ -6,8 +6,4 @@ ADD ./storefront-remix-starter .
 
 COPY ./entrypoint.sh .
 
-RUN npm install
-
-RUN npm run build
-
-CMD ["npm", "run", "start"]
+ENTRYPOINT ["./entrypoint.sh"]
