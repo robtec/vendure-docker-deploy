@@ -95,6 +95,7 @@ services:
       SERVER_API_HOST: https://admin.${PRIMARY_DOMAIN}
       SERVER_API_PORT: 443
       SERVER_API_PATH: shop-api
+      STRIPE_PUBLISHABLE_KEY : ${STRIPE_WEBHOOK_SIGNING_SECRET}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.storefront.rule=Host(`${PRIMARY_DOMAIN}`)"
