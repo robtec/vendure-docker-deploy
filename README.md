@@ -19,3 +19,8 @@ docker compose convert
 ```
 docker compose up -d
 ```
+
+## Rebuild and redeploy the docker containers
+```
+docker compose 
+```
