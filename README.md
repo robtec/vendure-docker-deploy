@@ -24,8 +24,10 @@ $ docker compose up -d
 ```
 
 # rebuild fresh images
+
 $ docker compose build --no-cache
 
 # restart all containers with new images
+
 $ docker compose up -d
 ```
