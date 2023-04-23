@@ -11,4 +11,4 @@ RUN echo ">>> Seeding env vars to .env file" && \
     echo "NODE_ENV=production" >> /usr/src/app/.env && \
     echo "STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}" >> /usr/src/app/.env
 
-CMD npm run dev
+CMD ["npm", "run", "dev"]
