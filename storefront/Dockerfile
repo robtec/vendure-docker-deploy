@@ -1,5 +1,10 @@
 FROM node:16
 
+ARG SERVER_API_HOST
+ARG SERVER_API_PORT
+ARG SERVER_API_PATH
+ARG STRIPE_PUBLISHABLE_KEY
+
 WORKDIR /usr/src/app
 
 ADD ./storefront-remix-starter .
