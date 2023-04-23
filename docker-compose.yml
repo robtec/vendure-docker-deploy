@@ -89,9 +89,7 @@ services:
   storefront:
     build:
       context: ./storefront/
-      dockerfile: Dockerfile.remixstorefront
-      args:
-        STOREFRONT_VERSION: 0.1.27
+      dockerfile: Dockerfile
     environment:
       SERVER_API_HOST: https://admin.${PRIMARY_DOMAIN}
       SERVER_API_PORT: 443
