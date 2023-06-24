@@ -28,6 +28,7 @@ export async function populateOnFirstRun(config: VendureConfig) {
             require.resolve('@vendure/create/assets/products.csv')
         ).then(app => app.close())
     } else {
+        console.log(`Vendure tables found in DB. Skipping Populating database`);
         return;
     }
 }
