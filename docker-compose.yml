@@ -32,7 +32,7 @@ services:
     depends_on:
       - database
     volumes:
-      - /usr/src/app
+      - app-data/usr/src/app
     environment:
       APP_ENV: ${APP_ENV}
       COOKIE_SECRET: ${COOKIE_SECRET}
@@ -64,7 +64,7 @@ services:
       dockerfile: Dockerfile
     command: ["yarn", "start:worker"]
     volumes:
-      - /usr/src/app
+      - app-data:/usr/src/app
     depends_on:
       - server
       - database
@@ -114,3 +114,4 @@ services:
 
 volumes:
   db-data:
+  app-data:
