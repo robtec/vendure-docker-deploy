@@ -99,9 +99,6 @@ export const config: VendureConfig = {
             port: 3002,
         }),
         StripePlugin.init({
-            apiKey: process.env.STRIPE_SECRET_KEY,
-            webhookSigningSecret: process.env.STRIPE_WEBHOOK_SIGNING_SECRET,
-            // This prevents different customers from using the same PaymentIntent
             storeCustomersInStripe: true,
           }),
     ],
