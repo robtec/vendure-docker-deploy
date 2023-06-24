@@ -15,14 +15,14 @@ $ docker compose convert
 $ docker compose up -d
 ```
 
-## Redeploy the docker containers
+## Re-deploy the docker containers after code change
+
+### Rebuild images
+```
+$ docker compose build --no-cache
 ```
 
-# rebuild fresh images
-
-$ docker compose build --no-cache
-
-# restart all containers with new images
-
+### Restart all containers with new images
+```
 $ docker compose up -d
 ```
