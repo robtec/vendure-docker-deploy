@@ -7,7 +7,6 @@ services:
     container_name: traefik
     command:
       - "--log.level=DEBUG"
-      #- "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:443"
@@ -32,7 +31,7 @@ services:
     depends_on:
       - database
     volumes:
-      - app-data/usr/src/app
+      - app-data:/usr/src/app
     environment:
       APP_ENV: ${APP_ENV}
       COOKIE_SECRET: ${COOKIE_SECRET}
